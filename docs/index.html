@@ -1,50 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Transparency - Day 1 - Weird Web October 2025</title>
+    <meta property="og:title" content="Transparency - Day 1 - Weird Web October 2025" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>Transparency - Day 1 - Weird Web October 2025</title>
-<meta property="og:title" content="Transparency - Day 1 - Weird Web October 2025" />
-
-<link rel="shortcut icon" href="/favicon.ico" />
-
-<meta name="description" content="" />
-<meta
-  property="og:description"
-  content=""
-/>
-
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://wwo-2025-1.alanwsmith.com/" />
-<meta
-  property="og:image"
-  content="https://res.cloudinary.com/awsimages/image/upload/c_fit,co_rgb:ffffff,l_text:Aldrich_42_bold:1/fl_layer_apply,g_north_west,x_230,y_488/wwo-2025-base-og-image_tumugk.png"
-/>
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="675" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://res.cloudinary.com/awsimages/image/upload/c_fit,co_rgb:ffffff,l_text:Aldrich_42_bold:1/fl_layer_apply,g_north_west,x_230,y_488/wwo-2025-base-og-image_tumugk.png">
-
-<link
-  rel="apple-touch-icon"
-  sizes="180x180"
-  href="/favicons/apple-touch-icon.png"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="16x16"
-  href="/favicons/favicon-16x16.png"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  sizes="32x32"
-  href="/favicons/favicon-32x32.png"
-/>
-<link rel="manifest" href="/favicons/site.webmanifest" />
-<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="description" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wwo-2025-1.alanwsmith.com/" />
+    <meta property="og:image" content="https://res.cloudinary.com/awsimages/image/upload/c_fit,co_rgb:ffffff,l_text:Aldrich_42_bold:1/fl_layer_apply,g_north_west,x_230,y_488/wwo-2025-base-og-image_tumugk.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://res.cloudinary.com/awsimages/image/upload/c_fit,co_rgb:ffffff,l_text:Aldrich_42_bold:1/fl_layer_apply,g_north_west,x_230,y_488/wwo-2025-base-og-image_tumugk.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
 
 <style>
 :root {
@@ -1399,12 +1374,14 @@ video {
 
 .selfie-wrapper {
   position: relative;
+  max-width: 72%;
+  margin-top: 8%;
+  margin-inline: auto;
 }
 
 .placeholder {
   opacity: 0;
 }
-
 
 .selfie {
   opacity: 20%;
@@ -1421,6 +1398,9 @@ video {
   left: 0;
 }
 
+main {
+  margin-block: 2.2rem;
+}
 
     </style>
   </head>
@@ -1429,8 +1409,8 @@ video {
       <header class="default-wrapper xlarge-bottom-margin">
         <h1>Weird Web October<br />Day 1 - Transparency</h1>
         <div class="day_nav small-font accent-bottom-border">
+          <a href="https://wwo-2025-0.alanwsmith.com/">Details</a> - 
           Day: 
-              <a href="https://wwo-2025-0.alanwsmith.com/">0</a>
               1
         </div>
       </header>
@@ -1454,7 +1434,7 @@ function addStyles() {
 .layer-${index} {
   transform: rotate(var(--layer-${index}-rotation));
   transition:
-    transform 4000ms;
+    transform 3000ms;
 }`;
   });
   const output = lines.join("\n");
@@ -1497,7 +1477,7 @@ window.bittyClasses = {
       if (el) {
         el.hidden = true;
       }
-      await sleep(1000);
+      await sleep(300);
       if (s.rotated) {
         for (let index = 0; index < 10; index += 1) {
           console.log(index);
@@ -1506,7 +1486,7 @@ window.bittyClasses = {
             `0deg`
           );
         }
-        await sleep(4200);
+        await sleep(3700);
         s.rotated = false;
         this.rotate();
       } else {
@@ -1517,7 +1497,7 @@ window.bittyClasses = {
             `${randomInt(-360, 360)}deg`
           );
         }
-        await sleep(4200);
+        await sleep(3700);
         s.rotated = true;
         this.rotate();
       }

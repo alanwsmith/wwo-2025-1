@@ -14,7 +14,7 @@ function addStyles() {
 .layer-${index} {
   transform: rotate(var(--layer-${index}-rotation));
   transition:
-    transform 4000ms;
+    transform 3000ms;
 }`;
   });
   const output = lines.join("\n");
@@ -57,7 +57,7 @@ window.bittyClasses = {
       if (el) {
         el.hidden = true;
       }
-      await sleep(1000);
+      await sleep(300);
       if (s.rotated) {
         for (let index = 0; index < 10; index += 1) {
           console.log(index);
@@ -66,7 +66,7 @@ window.bittyClasses = {
             `0deg`
           );
         }
-        await sleep(4200);
+        await sleep(3700);
         s.rotated = false;
         this.rotate();
       } else {
@@ -77,7 +77,7 @@ window.bittyClasses = {
             `${randomInt(-360, 360)}deg`
           );
         }
-        await sleep(4200);
+        await sleep(3700);
         s.rotated = true;
         this.rotate();
       }
