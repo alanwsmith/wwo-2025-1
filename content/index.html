@@ -1,13 +1,51 @@
 [! extends "_wrappers/main.html" !]
-
 [! block main !]
-<main class="default-wrapper">
-  <p>
-    This is a placeholder for day [@ day_num @]
-    of <a href="https://weirdweboctober.website/">Weird Web October 2025</a>. 
-  </p>
-</main>
 
+<script>
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function addStyles() {
+  const sheet = new CSSStyleSheet();
+
+  const lines = [...Array(10)].map((_, index) => {
+    return `
+:root { --layer-${index}-rotation: ${randomInt(0, 360)}deg }
+.layer-${index} {
+  transform: rotate(var(--layer-${index}-rotation));
+  transition:
+    transform 3000ms;
+}`;
+  });
+
+  const output = lines.join("\n");
+  console.log(output);
+  sheet.replaceSync(output);
+  document.adoptedStyleSheets.push(sheet);
+}
+
+window.bittyClasses = {
+  BittyStuff: class {
+    bittyInit() {
+      addStyles()
+
+    }
+
+    init(_event, el) {
+      const images = [...Array(10)].map((_, index) => {
+        return `<img src="/images/selfie-1.png" class="selfie layer-${index}" />`
+      });
+      images.push(
+        `<img src="/images/selfie-1.png" class="placeholder" />`
+      );
+      el.innerHTML = images.join("\n");
+    }
+  }
+}
+</script>
+
+<div class="selfie-wrapper" data-receive="init"></div>
 [! endblock !]
-
 

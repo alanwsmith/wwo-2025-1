@@ -1,5 +1,7 @@
+[!- set theme = "Transparency" !]
 [!- set day_num = 1 -!]
-[!- set page_title -!]Alan's Weird Web October Day [@ day_num @][!- endset -!]
+[!- set end_day = 1 -!]
+[!- set page_title -!][@ theme @] - Day [@ day_num @] - Weird Web October 2025[!- endset -!]
 [!- set description -!]
 One site a day for every day in October. Each one with a different theme
 [!- endset -!]
@@ -1251,7 +1253,6 @@ iframe {
 }
 img {
   max-width: 100%;
-  border: var(--accent-border);
 }
 input {
   margin: var(--xxxsmall-margin);
@@ -1411,15 +1412,32 @@ video {
   grid-template-rows: auto 1fr auto;
 }
 
+.selfie-wrapper {
+  position: relative;
+}
+
+.placeholder {
+  opacity: 0;
+}
+
+
+.selfie {
+  opacity: 20%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
     </style>
   </head>
   <body>
-    <bitty-v1-rc5 data-connect="/components/page.js" class="page-wrapper">
+    <bitty-v1-rc5 data-connect="BittyStuff" class="page-wrapper" data-send="init">
       <header class="default-wrapper xlarge-bottom-margin">
-        <h1>Weird Web October - Day [@ day_num @]</h1>
+        <h1>Weird Web October<br />Day [@ day_num @] - [@ theme @]</h1>
         <div class="day_nav small-font accent-bottom-border">
           Day: 
-          [! for num in range(0, 32) !]
+          [! for num in range(0, end_day + 1) !]
             [! if num != day_num !]
               <a href="https://wwo-2025-[@ num @].alanwsmith.com/">[@ num @]</a>
             [! else !]
@@ -1428,7 +1446,14 @@ video {
           [! endfor !]
         </div>
       </header>
+      <main class="default-wrapper">
+        <noscript>
+          This page needs JavaScript to run properly. It's either off
+          or not functioning in your browser. The experience
+          may not make sense without it. 
+        </noscript>
     [! block main !][! endblock !]
+      </main>
 
       <footer>
         <div class="small-font">
