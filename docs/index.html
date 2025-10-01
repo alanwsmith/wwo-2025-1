@@ -1413,6 +1413,14 @@ video {
   left: 0;
 }
 
+.headsup {
+  color: var(--warning);
+  background-color: var(--link);
+  position: absolute;
+  top: 30%;
+  left: 0;
+}
+
 
     </style>
   </head>
@@ -1434,45 +1442,85 @@ video {
         </noscript>
 
 <script>
+const s = {
+  rotated: true
+};
+
+function addStyles() {
+  const sheet = new CSSStyleSheet();
+  const lines = [...Array(10)].map((_, index) => {
+    return `
+:root { --layer-${index}-rotation: ${randomInt(-360, 360)}deg }
+.layer-${index} {
+  transform: rotate(var(--layer-${index}-rotation));
+  transition:
+    transform 4000ms;
+}`;
+  });
+  const output = lines.join("\n");
+  sheet.replaceSync(output);
+  document.adoptedStyleSheets.push(sheet);
+}
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function addStyles() {
-  const sheet = new CSSStyleSheet();
 
-  const lines = [...Array(10)].map((_, index) => {
-    return `
-:root { --layer-${index}-rotation: ${randomInt(0, 360)}deg }
-.layer-${index} {
-  transform: rotate(var(--layer-${index}-rotation));
-  transition:
-    transform 3000ms;
-}`;
-  });
-
-  const output = lines.join("\n");
-  console.log(output);
-  sheet.replaceSync(output);
-  document.adoptedStyleSheets.push(sheet);
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 window.bittyClasses = {
   BittyStuff: class {
     bittyInit() {
       addStyles()
-
     }
 
-    init(_event, el) {
+    async init(_event, el) {
       const images = [...Array(10)].map((_, index) => {
         return `<img src="/images/selfie-1.png" class="selfie layer-${index}" />`
       });
       images.push(
         `<img src="/images/selfie-1.png" class="placeholder" />`
       );
+      images.push(
+        `<div class="headsup" data-receive="rotate">Head's up - this image moves a lot.
+<br />
+<button data-send="rotate">Click here if you're okay with that</button>
+</div>`
+      );
       el.innerHTML = images.join("\n");
+    }
+
+    async rotate(_event, el) {
+      if (el) {
+        el.hidden = true;
+      }
+      await sleep(1000);
+      if (s.rotated) {
+        for (let index = 0; index < 10; index += 1) {
+          console.log(index);
+          document.documentElement.style.setProperty(
+            `--layer-${index}-rotation`,
+            `0deg`
+          );
+        }
+        await sleep(4200);
+        s.rotated = false;
+        this.rotate();
+      } else {
+        for (let index = 0; index < 10; index += 1) {
+          console.log(index);
+          document.documentElement.style.setProperty(
+            `--layer-${index}-rotation`,
+            `${randomInt(-360, 360)}deg`
+          );
+        }
+        await sleep(4200);
+        s.rotated = true;
+        this.rotate();
+      }
     }
   }
 }
