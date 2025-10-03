@@ -1,2 +1,84 @@
+const s = {
+  rotated: true
+};
+
+function addStyles() {
+  const sheet = new CSSStyleSheet();
+  const lines = [...Array(10)].map((_, index) => {
+    return `
+:root { --layer-${index}-rotation: ${randomInt(-360, 360)}deg }
+.layer-${index} {
+  transform: rotate(var(--layer-${index}-rotation));
+  transition:
+    transform 3000ms;
+}`;
+  });
+  const output = lines.join("\n");
+  sheet.replaceSync(output);
+  document.adoptedStyleSheets.push(sheet);
+}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 export default class {
+  bittyInit() {
+    document.documentElement.style.setProperty("--page-visibility", "visible");
+      addStyles()
+  }
+
+
+    async init(_event, el) {
+      const images = [...Array(10)].map((_, index) => {
+        return `<img src="/images/selfie-1.png" class="selfie layer-${index}" />`
+      });
+      images.push(
+        `<img src="/images/selfie-1.png" class="placeholder" />`
+      );
+      images.push(
+        `<div class="headsup" data-receive="rotate">Head's up - this image moves a lot.
+<br />
+<button data-send="rotate">Click here if you're okay with that</button>
+</div>`
+      );
+      el.innerHTML = images.join("\n");
+    }
+
+    async rotate(_event, el) {
+      if (el) {
+        el.hidden = true;
+      }
+      await sleep(300);
+      if (s.rotated) {
+        for (let index = 0; index < 10; index += 1) {
+          document.documentElement.style.setProperty(
+            `--layer-${index}-rotation`,
+            `0deg`
+          );
+        }
+        await sleep(3700);
+        s.rotated = false;
+        this.rotate();
+      } else {
+        for (let index = 0; index < 10; index += 1) {
+          document.documentElement.style.setProperty(
+            `--layer-${index}-rotation`,
+            `${randomInt(-360, 360)}deg`
+          );
+        }
+        await sleep(3700);
+        s.rotated = true;
+        this.rotate();
+      }
+    }
+
+
+
 }
